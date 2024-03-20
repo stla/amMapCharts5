@@ -39,8 +39,8 @@ addPolygons <- function(
   }
   n <- length(series)
   series[[n+1L]] <- list(
-    "type" = "MapPolygonSeries",
-    "data" = data,
+    "type"    = "MapPolygonSeries",
+    "data"    = data,
     "geojson" = geojson,
     "options" =  list(
       fill        = fill,
