@@ -34,7 +34,7 @@ HTMLWidgets.widget({
         var root = am5.Root.new(el.id);
         let chart = root.container.children.push(
           am5map.MapChart.new(root, {
-            projection: am5map["geoMercator"]()
+            projection: am5map[x.projection]()
           })
         );
         for (xseries of x.series) {

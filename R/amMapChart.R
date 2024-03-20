@@ -7,12 +7,29 @@
 #'
 #' @export
 amMapChart <- function(
-  data, width = NULL, height = NULL, elementId = NULL
+  projection = "Mercator", width = NULL, height = NULL, elementId = NULL
 ) {
+
+  projections <- c(
+    "equalEarth",
+    "equirectangular",
+    "Mercator",
+    "naturalEarth1",
+    "orthographic"
+  )
+  projection <- match.arg(projection, projections)
+  geoProjections <- c(
+    "geoEqualEarth",
+    "geoEquirectangular",
+    "geoMercator",
+    "geoNaturalEarth1",
+    "geoOrthographic"
+  )
+  names(geoProjections) <- projections
 
   # forward options using x
   x = list(
-    data = data
+    projection = geoProjections[projection]
   )
 
   # create widget
