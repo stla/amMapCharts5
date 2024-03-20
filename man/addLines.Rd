@@ -2,7 +2,7 @@
 % Please edit documentation in R/series.R
 \name{addLines}
 \alias{addLines}
-\title{Add polygons to a map}
+\title{Add lines to a map}
 \usage{
 addLines(
   map,
@@ -16,24 +16,24 @@ addLines(
 \arguments{
 \item{map}{an \code{amMapChart} widget}
 
-\item{coordinates}{for a single polygon, this can be a numeric matrix with
+\item{coordinates}{for a single line, this can be a numeric matrix with
 two columns or a dataframe having two columns \code{longitude} and
-\code{latitude}; for multiple polygons, a list of such matrices or
+\code{latitude}; for multiple lines, a list of such matrices or
 dataframes; or the path to a \strong{geojson} file}
 
-\item{color}{fill color}
+\item{lineType}{type of the line, \code{"curved"} or \code{"straight"}}
 
-\item{opacity}{opacity, a number between 0 and 1}
+\item{color}{line color}
 
-\item{strokeColor}{stroke color}
+\item{opacity}{line opacity, a number between 0 and 1}
 
-\item{strokeWidth}{stroke width}
+\item{width}{line width}
 }
 \value{
 An \code{amMapChart} widget.
 }
 \description{
-Add some polygons to an \code{amMapChart}.
+Add some lines to an \code{amMapChart}.
 }
 \note{
 A color can be given by the name of a R color, the name of a CSS
@@ -45,6 +45,12 @@ A color can be given by the name of a R color, the name of a CSS
 library(amMapCharts5)
 continents <-
   system.file("geojson", "continentsLow.json", package = "amMapCharts5")
-amMapChart() \%>\%
-  addPolygons(continents, color = "orange", strokeColor = "black")
+line <- rbind(
+  c(-73.778137, 40.641312),
+  c(-0.454296, 51.470020),
+  c(116.597504, 40.072498)
+)
+amMapChart() |>
+  addPolygons(continents, color = "orange", strokeColor = "black") \%>\%
+  addLines(line, color = "purple", width = 3)
 }

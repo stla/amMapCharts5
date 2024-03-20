@@ -135,18 +135,18 @@ addPoints <- function(
   map
 }
 
-#' Add polygons to a map
-#' @description Add some polygons to an \code{amMapChart}.
+#' Add lines to a map
+#' @description Add some lines to an \code{amMapChart}.
 #'
 #' @param map an \code{amMapChart} widget
-#' @param coordinates for a single polygon, this can be a numeric matrix with
+#' @param coordinates for a single line, this can be a numeric matrix with
 #'   two columns or a dataframe having two columns \code{longitude} and
-#'   \code{latitude}; for multiple polygons, a list of such matrices or
+#'   \code{latitude}; for multiple lines, a list of such matrices or
 #'   dataframes; or the path to a \strong{geojson} file
-#' @param color fill color
-#' @param opacity opacity, a number between 0 and 1
-#' @param strokeColor stroke color
-#' @param strokeWidth stroke width
+#' @param lineType type of the line, \code{"curved"} or \code{"straight"}
+#' @param color line color
+#' @param opacity line opacity, a number between 0 and 1
+#' @param width line width
 #'
 #' @return An \code{amMapChart} widget.
 #' @export
@@ -160,12 +160,19 @@ addPoints <- function(
 #' library(amMapCharts5)
 #' continents <-
 #'   system.file("geojson", "continentsLow.json", package = "amMapCharts5")
-#' amMapChart() %>%
-#'   addPolygons(continents, color = "orange", strokeColor = "black")
+#' line <- rbind(
+#'   c(-73.778137, 40.641312),
+#'   c(-0.454296, 51.470020),
+#'   c(116.597504, 40.072498)
+#' )
+#' amMapChart() |>
+#'   addPolygons(continents, color = "orange", strokeColor = "black") %>%
+#'   addLines(line, color = "purple", width = 3)
 addLines <- function(
     map, coordinates, lineType = "curved",
     color = NULL, opacity = NULL, width = NULL
 ) {
+  lineType <- match.arg(lineType, c("curved", "straight"))
   geojson <- NULL
   data    <- NULL
   if(is.character(coordinates)) {
