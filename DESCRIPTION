@@ -10,7 +10,8 @@ BugReports: https://github.com/stla/amMapCharts5/issues
 Imports: 
     htmlwidgets,
     htmltools,
-    grDevices
+    grDevices,
+    magrittr
 Encoding: UTF-8
 RoxygenNote: 7.3.1
 Depends: 

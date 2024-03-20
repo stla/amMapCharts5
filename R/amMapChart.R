@@ -2,14 +2,13 @@
 #'
 #' <Add Description>
 #'
-#' @import htmlwidgets
+#' @importFrom htmlwidgets createWidget
 #' @importFrom htmltools htmlDependency
 #'
 #' @export
 amMapChart <- function(
   projection = "Mercator", width = NULL, height = NULL, elementId = NULL
 ) {
-
   projections <- c(
     "equalEarth",
     "equirectangular",
@@ -33,7 +32,7 @@ amMapChart <- function(
   )
 
   # create widget
-  htmlwidgets::createWidget(
+  createWidget(
     name = "amMapChart",
     x,
     width = width,
@@ -52,30 +51,31 @@ amMapChart <- function(
   )
 }
 
-#' Shiny bindings for amChartMap
+#' Shiny bindings for amMapChart
 #'
-#' Output and render functions for using amChartMap within Shiny
+#' Output and render functions for using amMapChart within Shiny
 #' applications and interactive Rmd documents.
 #'
 #' @param outputId output variable to read from
 #' @param width,height Must be a valid CSS unit (like \code{'100\%'},
 #'   \code{'400px'}, \code{'auto'}) or a number, which will be coerced to a
 #'   string and have \code{'px'} appended.
-#' @param expr An expression that generates a amChartMap
+#' @param expr An expression that generates a amMapChart
 #' @param env The environment in which to evaluate \code{expr}.
 #' @param quoted Is \code{expr} a quoted expression (with \code{quote()})? This
 #'   is useful if you want to save an expression in a variable.
 #'
-#' @name amChartMap-shiny
+#' @name amMapChart-shiny
 #'
 #' @export
-amChartMapOutput <- function(outputId, width = '100%', height = '400px'){
-  htmlwidgets::shinyWidgetOutput(outputId, 'amChartMap', width, height, package = 'amMapCharts5')
+#' @importFrom htmlwidgets shinyWidgetOutput shinyRenderWidget
+amMapChartOutput <- function(outputId, width = '100%', height = '400px'){
+  shinyWidgetOutput(outputId, 'amMapChart', width, height, package = 'amMapCharts5')
 }
 
-#' @rdname amChartMap-shiny
+#' @rdname amMapChart-shiny
 #' @export
-renderAmChartMap <- function(expr, env = parent.frame(), quoted = FALSE) {
+renderAmMapChart <- function(expr, env = parent.frame(), quoted = FALSE) {
   if (!quoted) { expr <- substitute(expr) } # force quoted
-  htmlwidgets::shinyRenderWidget(expr, amChartMapOutput, env, quoted = TRUE)
+  shinyRenderWidget(expr, amMapChartOutput, env, quoted = TRUE)
 }

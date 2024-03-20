@@ -4,7 +4,12 @@
 \alias{amMapChart}
 \title{<Add Title>}
 \usage{
-amMapChart(data, width = NULL, height = NULL, elementId = NULL)
+amMapChart(
+  projection = "Mercator",
+  width = NULL,
+  height = NULL,
+  elementId = NULL
+)
 }
 \description{
 <Add Description>
