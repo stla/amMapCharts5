@@ -15,8 +15,23 @@ addPolygons <- function(
     map, coordinates,
     fill = "red", stroke = "black", strokeWidth = 2, fillOpacity = 0
 ) {
-  if(!is.list(coordinates)) {
+  geojson <- NULL
+  if(is.character(coordinates)) {
+    geojson <- paste0(readLines(coordinates), collapse = "\n")
+  }
+  data <- NULL
+  if(is.matrix(coordinates)) {
     coordinates <- list(coordinates)
+  }
+  if(is.list(coordinates)) {
+    data <- lapply(coordinates, function(M) {
+      list(
+        geometry = list(
+          "type" = "Polygon",
+          "coordinates" = array(M, dim = c(1L, nrow(M), 2L))
+        )
+      )
+    })
   }
   series <- map$x$series
   if(is.null(series)) {
@@ -25,17 +40,11 @@ addPolygons <- function(
   n <- length(series)
   series[[n+1L]] <- list(
     "type" = "MapPolygonSeries",
-    "data" = lapply(coordinates, function(M) {
-      list(
-        geometry = list(
-          "type" = "Polygon",
-          "coordinates" = array(M, dim = c(1L, nrow(M), 2L))
-        )
-      )
-    }),
+    "data" = data,
+    "geojson" = geojson,
     "options" =  list(
-      fill = fill,
-      stroke = stroke,
+      fill        = fill,
+      stroke      = stroke,
       strokeWidth = strokeWidth,
       fillOpacity = fillOpacity
     )
