@@ -32,13 +32,11 @@ HTMLWidgets.widget({
         }
         series[tmplt].template.setAll(xseries.options);
       } else if (xseries.type === "MapPointSeries") {
-        let options = xseries.bullet.options;
         series.bullets.push(function () {
           return am5.Bullet.new(root, {
-            sprite: am5[xseries.bullet.shape].new(root, {
-              fill: options.fill,
-              radius: options.radius
-            })
+            sprite: am5[xseries.bullet.shape].new(
+              root, {...xseries.bullet.options}
+            )
           });
         });
       }
@@ -65,3 +63,4 @@ HTMLWidgets.widget({
     };
   }
 });
+

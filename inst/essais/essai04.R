@@ -1,12 +1,12 @@
 library(amMapCharts5)
 
 gj <- system.file("geojson", "continentsLow.json", package = "amMapCharts5")
-dat <- unname(as.matrix(cities[, c("latitude", "longitude")]))
+dat <- cities
 
 amMapChart() |>
-  addPolygons(gj, stroke = NULL, fill = "transparent") |>
-  addPoints(dat[1:2,], amCircle(color = "black", opacity = 0.5)) |>
-  addPoints(dat[3:4,], amCircle(color = "black", opacity = 0.5))
+  addPolygons(gj, stroke = NULL, fill = "orange") |>
+  addPoints(dat[1:2,], amCircle(color = "black", radius = 3)) |>
+  addPoints(dat[3:4,], amCircle(color = "green", radius = 3))
 
 
 

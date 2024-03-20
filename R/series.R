@@ -71,15 +71,23 @@ addPoints <- function(
     geojson <- paste0(readLines(coordinates), collapse = "\n")
   }
   data <- NULL
-  if(is.matrix(coordinates)) {
-    data <- apply(coordinates, 1L, function(row) {
+  if(is.data.frame(coordinates)) {
+    if(!is.element("title", colnames(coordinates))) {
+      coordinates[["title"]] <- NA
+    } else {
+      bullet[["options"]][["tooltipY"]] <- 0L
+      bullet[["options"]][["tooltipText"]] <- "{title}"
+    }
+    coordinates <- unname(split(coordinates, 1L:nrow(coordinates)))
+    data <- lapply(coordinates, function(row) {
       list(
         geometry = list(
           "type"        = "Point",
-          "coordinates" = row
-        )
+          "coordinates" = as.numeric(row[, c("longitude", "latitude")])
+        ),
+        title = row[["title"]]
       )
-    }, simplify = FALSE)
+    })
   }
   series <- map$x$series
   if(is.null(series)) {
