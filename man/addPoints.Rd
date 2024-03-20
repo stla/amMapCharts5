@@ -2,13 +2,32 @@
 % Please edit documentation in R/series.R
 \name{addPoints}
 \alias{addPoints}
-\title{Title}
+\title{Add points to a map}
 \usage{
 addPoints(map, coordinates, bullet)
 }
 \arguments{
-\item{bullet}{}
+\item{map}{an \code{amMapChart} widget}
+
+\item{coordinates}{this can be a matrix with two columns, or a dataframe
+having two columns \code{longitude} and \code{latitude} and optionally
+a column \code{title} for the tooltips, or the path to a \strong{geojson}
+file}
+
+\item{bullet}{list of settings for the bullets created with
+\code{\link{amCircle}}, \code{\link{amTriangle}} or \code{\link{amRectangle}}}
+}
+\value{
+An \code{amMapChart} widget.
 }
 \description{
-Title
+Add some points to an \code{amMapChart}.
+}
+\examples{
+library(amMapCharts5)
+continents <-
+  system.file("geojson", "continentsLow.json", package = "amMapCharts5")
+amMapChart() \%>\%
+  addPolygons(continents, color = "orange", strokeColor = "black") \%>\%
+  addPoints(cities, amCircle(color = "black", radius = 3))
 }

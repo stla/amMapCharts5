@@ -1,4 +1,5 @@
-#' Title
+#' Add polygons to a map
+#' @description Add some polygons to an \code{amMapChart}.
 #'
 #' @param map an \code{amMapChart} widget
 #' @param coordinates for a single polygon, this can be a numeric matrix with
@@ -12,6 +13,11 @@
 #'
 #' @return An \code{amMapChart} widget.
 #' @export
+#'
+#' @note A color can be given by the name of a R color, the name of a CSS
+#'   color, e.g. \code{"transparent"} or \code{"fuchsia"}, an HEX code like
+#'   \code{"#ff009a"}, a RGB code like \code{"rgb(255,100,39)"}, or a HSL code
+#'   like \code{"hsl(360,11,255)"}.
 #'
 #' @examples
 #' library(amMapCharts5)
@@ -63,18 +69,29 @@ addPolygons <- function(
   map
 }
 
-#' Title
+#' Add points to a map
+#' @description Add some points to an \code{amMapChart}.
 #'
-#' @param map
-#' @param coordinates
-#' @param bullet
+#' @param map an \code{amMapChart} widget
+#' @param coordinates this can be a matrix with two columns, or a dataframe
+#'    having two columns \code{longitude} and \code{latitude} and optionally
+#'    a column \code{title} for the tooltips, or the path to a \strong{geojson}
+#'    file
+#' @param bullet list of settings for the bullets created with
+#'   \code{\link{amCircle}}, \code{\link{amTriangle}} or \code{\link{amRectangle}}
 #'
-#' @return
+#' @return An \code{amMapChart} widget.
 #' @export
 #'
 #' @examples
+#' library(amMapCharts5)
+#' continents <-
+#'   system.file("geojson", "continentsLow.json", package = "amMapCharts5")
+#' amMapChart() %>%
+#'   addPolygons(continents, color = "orange", strokeColor = "black") %>%
+#'   addPoints(cities, amCircle(color = "black", radius = 3))
 addPoints <- function(
-    map, coordinates, bullet
+  map, coordinates, bullet
 ) {
   geojson <- NULL
   data    <- NULL

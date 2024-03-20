@@ -2,7 +2,7 @@
 % Please edit documentation in R/series.R
 \name{addPolygons}
 \alias{addPolygons}
-\title{Title}
+\title{Add polygons to a map}
 \usage{
 addPolygons(
   map,
@@ -33,7 +33,13 @@ dataframes; or the path to a \strong{geojson} file}
 An \code{amMapChart} widget.
 }
 \description{
-Title
+Add some polygons to an \code{amMapChart}.
+}
+\note{
+A color can be given by the name of a R color, the name of a CSS
+  color, e.g. \code{"transparent"} or \code{"fuchsia"}, an HEX code like
+  \code{"#ff009a"}, a RGB code like \code{"rgb(255,100,39)"}, or a HSL code
+  like \code{"hsl(360,11,255)"}.
 }
 \examples{
 library(amMapCharts5)

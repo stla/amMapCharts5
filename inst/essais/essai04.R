@@ -1,6 +1,7 @@
 library(amMapCharts5)
 
-gj <- system.file("geojson", "continentsLow.json", package = "amMapCharts5")
+continents <-
+  system.file("geojson", "continentsLow.json", package = "amMapCharts5")
 dat <- cities
 
 amMapChart() |>
