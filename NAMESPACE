@@ -2,6 +2,7 @@
 
 export("%>%")
 export(JS)
+export(addLines)
 export(addPoints)
 export(addPolygons)
 export(amCircle)

@@ -37,3 +37,5 @@ isPositiveInteger <- function(x){
 isNumber <- function(x){
   is.numeric(x) && (length(x) == 1L) && (!is.na(x))
 }
+
+emptyNamedList <- `names<-`(list(), character(0L))
