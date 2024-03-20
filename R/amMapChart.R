@@ -29,7 +29,7 @@ amMapChart <- function(
 
   # forward options using x
   x = list(
-    projection = geoProjections[projection]
+    projection = geoProjections[projection][[1L]]
   )
 
   # create widget

@@ -52,3 +52,46 @@ addPolygons <- function(
   map$x$series <- series
   map
 }
+
+#' Title
+#'
+#' @param map
+#' @param coordinates
+#' @param bullet
+#'
+#' @return
+#' @export
+#'
+#' @examples
+addPoints <- function(
+  map, coordinates, bullet
+) {
+  geojson <- NULL
+  if(is.character(coordinates)) {
+    geojson <- paste0(readLines(coordinates), collapse = "\n")
+  }
+  data <- NULL
+  if(is.matrix(coordinates)) {
+    data <- apply(coordinates, 1L, function(row) {
+      list(
+        geometry = list(
+          "type"        = "Point",
+          "coordinates" = row
+        )
+      )
+    }, simplify = FALSE)
+  }
+  series <- map$x$series
+  if(is.null(series)) {
+    series <- list()
+  }
+  n <- length(series)
+  series[[n+1L]] <- list(
+    "type"    = "MapPointSeries",
+    "data"    = data,
+    "geojson" = geojson,
+    "bullet"  = bullet
+  )
+  map$x$series <- series
+  map
+}

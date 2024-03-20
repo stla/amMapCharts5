@@ -6,27 +6,42 @@ HTMLWidgets.widget({
   factory: function (el, width, height) {
     let addSeries = function (root, chart, xseries) {
       let data = {};
-      if(xseries.geojson) {
+      if (xseries.geojson) {
         data = {
           geoJSON: JSON.parse(xseries.geojson)
         };
       }
       let series = chart.series.push(am5map[xseries.type].new(root, data));
-      if(xseries.data) {
+      if (xseries.data) {
         series.data.setAll(xseries.data);
       }
-      let tmplt;
-      switch (xseries.type) {
-        case "MapPolygonSeries":
-          tmplt = "mapPolygons";
-          break;
-        case "MapLineSeries":
-          tmplt = "mapLines";
-          break;
-        default:
-          tmplt = "xxx";
+      if (
+        xseries.type === "MapPolygonSeries" ||
+        xseries.type === "MapLinesSeries"
+      ) {
+        let tmplt;
+        switch (xseries.type) {
+          case "MapPolygonSeries":
+            tmplt = "mapPolygons";
+            break;
+          case "MapLineSeries":
+            tmplt = "mapLines";
+            break;
+          default:
+            tmplt = "xxx";
+        }
+        series[tmplt].template.setAll(xseries.options);
+      } else if (xseries.type === "MapPointSeries") {
+        let options = xseries.bullet.options;
+        series.bullets.push(function () {
+          return am5.Bullet.new(root, {
+            sprite: am5[xseries.bullet.shape].new(root, {
+              fill: options.fill,
+              radius: options.radius
+            })
+          });
+        });
       }
-      series[tmplt].template.setAll(xseries.options);
     };
 
     return {
@@ -37,7 +52,7 @@ HTMLWidgets.widget({
             projection: am5map[x.projection]()
           })
         );
-        for (xseries of x.series) {
+        for (let xseries of x.series) {
           addSeries(root, chart, xseries);
         }
 
