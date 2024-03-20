@@ -4,22 +4,25 @@ HTMLWidgets.widget({
   type: "output",
 
   factory: function (el, width, height) {
+    let addSeries = function (root, chart, xseries) {
+      console.log(xseries)
+      let series = chart.series.push(am5map[xseries.type].new(root, {}));
+      series.data.setAll(xseries.data);
+      series["mapPolygons"].template.setAll(xseries.options);
+    };
+
     return {
       renderValue: function (x) {
         var root = am5.Root.new(el.id);
         let chart = root.container.children.push(
           am5map.MapChart.new(root, {
-            projection: am5map.geoMercator()
+            projection: am5map["geoMercator"]()
           })
         );
+        for (xseries of x.series) {
+          addSeries(root, chart, xseries);
+        }
 
-        let polygonSeries = chart.series.push(
-          am5map.MapPolygonSeries.new(root, {})
-        );
-        polygonSeries.data.push(x.data);
-        polygonSeries.mapPolygons.template.setAll({
-          fill: am5.color(0xdadada)
-        });
         chart.appear(1000, 100);
       },
 

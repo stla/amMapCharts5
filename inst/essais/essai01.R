@@ -1,5 +1,5 @@
 library(amMapCharts5)
-library(geojsonR)
+#library(geojsonR)
 
 gj <- system.file("geojson", "Lithuania.geojson", package = "amMapCharts5")
 #dat <- FROM_GeoJson(gj)
