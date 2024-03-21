@@ -80,7 +80,7 @@ addPolygons <- function(
 #' @param map an \code{amMapChart} widget
 #' @param coordinates this can be a matrix with two columns, or a dataframe
 #'    having two columns \code{longitude} and \code{latitude} and optionally
-#'    a column \code{title} for the tooltips, or the path to a \strong{geojson}
+#'    a column \code{name} for the tooltips, or the path to a \strong{geojson}
 #'    file
 #' @param bullet list of settings for the bullets created with
 #'   \code{\link{amCircle}}, \code{\link{amTriangle}} or \code{\link{amRectangle}}
@@ -107,11 +107,11 @@ addPoints <- function(
       colnames(coordinates) <- c("longitude", "latitude")
       coordinates <- as.data.frame(coordinates)
     }
-    if(!is.element("title", colnames(coordinates))) {
-      coordinates[["title"]] <- NA
+    if(!is.element("name", colnames(coordinates))) {
+      coordinates[["name"]] <- NA
     } else {
       bullet[["options"]][["tooltipY"]]    <- 0L
-      bullet[["options"]][["tooltipText"]] <- "{title}"
+      bullet[["options"]][["tooltipText"]] <- "{name}"
     }
     coordinates <- unname(split(coordinates, 1L:nrow(coordinates)))
     data <- lapply(coordinates, function(row) {
@@ -120,7 +120,7 @@ addPoints <- function(
           "type"        = "Point",
           "coordinates" = as.numeric(row[, c("longitude", "latitude")])
         ),
-        title = row[["title"]]
+        name = row[["name"]]
       )
     })
   }
