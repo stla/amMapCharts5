@@ -6,6 +6,8 @@
 #'   two columns or a dataframe having two columns \code{longitude} and
 #'   \code{latitude}; for multiple polygons, a list of such matrices or
 #'   dataframes; or the path to a \strong{geojson} file
+#' @param tooltipKey if \code{coordinates} is given by a \strong{geojson} file,
+#'   the name of a property whose value will appear in tooltips
 #' @param color fill color
 #' @param opacity opacity, a number between 0 and 1
 #' @param strokeColor stroke color
@@ -22,11 +24,13 @@
 #' @examples
 #' library(amMapCharts5)
 #' continents <-
-#'   system.file("geojson", "continentsLow.json", package = "amMapCharts5")
+#'   system.file("geojson", "worldLow.json", package = "amMapCharts5")
 #' amMapChart() %>%
-#'   addPolygons(continents, color = "orange", strokeColor = "black")
+#'   addPolygons(
+#'     continents, tooltipKey = "name", color = "red", strokeColor = "black"
+#'   )
 addPolygons <- function(
-    map, coordinates,
+    map, coordinates, tooltipKey = NULL,
     color = NULL, opacity = NULL, strokeColor = NULL, strokeWidth = NULL
 ) {
   geojson <- NULL
@@ -62,7 +66,8 @@ addPolygons <- function(
       "fill"        = validateColor(color),
       "stroke"      = validateColor(strokeColor),
       "strokeWidth" = strokeWidth,
-      "fillOpacity" = opacity
+      "fillOpacity" = opacity,
+      "tooltipText" = if(!is.null(tooltipKey)) sprintf("{%s}", tooltipKey)
     )
   )
   map[["x"]][["series"]] <- series

@@ -1,6 +1,6 @@
 library(amMapCharts5)
 continents <-
-  system.file("geojson", "continentsLow.json", package = "amMapCharts5")
+  system.file("geojson", "worldLow.json", package = "amMapCharts5")
 line <- rbind(
   c(-73.778137, 40.641312),
   c(-0.454296, 51.470020),
