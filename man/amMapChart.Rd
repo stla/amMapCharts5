@@ -6,6 +6,7 @@
 \usage{
 amMapChart(
   projection = "Mercator",
+  grid = list(step = 10, color = "black", opacity = 0.1),
   width = NULL,
   height = NULL,
   elementId = NULL

@@ -7,6 +7,7 @@
 addPolygons(
   map,
   coordinates,
+  tooltipKey = NULL,
   color = NULL,
   opacity = NULL,
   strokeColor = NULL,
@@ -20,6 +21,9 @@ addPolygons(
 two columns or a dataframe having two columns \code{longitude} and
 \code{latitude}; for multiple polygons, a list of such matrices or
 dataframes; or the path to a \strong{geojson} file}
+
+\item{tooltipKey}{if \code{coordinates} is given by a \strong{geojson} file,
+the name of a property whose value will appear in tooltips}
 
 \item{color}{fill color}
 
@@ -44,7 +48,9 @@ A color can be given by the name of a R color, the name of a CSS
 \examples{
 library(amMapCharts5)
 continents <-
-  system.file("geojson", "continentsLow.json", package = "amMapCharts5")
+  system.file("geojson", "worldLow.json", package = "amMapCharts5")
 amMapChart() \%>\%
-  addPolygons(continents, color = "orange", strokeColor = "black")
+  addPolygons(
+    continents, tooltipKey = "name", color = "red", strokeColor = "black"
+  )
 }

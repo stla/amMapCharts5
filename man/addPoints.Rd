@@ -11,7 +11,7 @@ addPoints(map, coordinates, bullet)
 
 \item{coordinates}{this can be a matrix with two columns, or a dataframe
 having two columns \code{longitude} and \code{latitude} and optionally
-a column \code{title} for the tooltips, or the path to a \strong{geojson}
+a column \code{name} for the tooltips, or the path to a \strong{geojson}
 file}
 
 \item{bullet}{list of settings for the bullets created with

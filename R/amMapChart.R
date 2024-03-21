@@ -47,7 +47,7 @@ amMapChart <- function(
         name = "amcharts5",
         version = "5.8.6",
         src = "htmlwidgets/lib/amCharts5",
-        script = c("index.js", "map.js"),
+        script = c("index.js", "map.js", "exporting.js"),
         package = "amMapCharts5"
       )
     )

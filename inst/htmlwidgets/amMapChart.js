@@ -74,6 +74,28 @@ HTMLWidgets.widget({
       renderValue: function (x) {
         let root = am5.Root.new(el.id);
 
+        let exporting = am5plugins_exporting.Exporting.new(root, {
+          menu: am5plugins_exporting.ExportingMenu.new(root, {}),
+          htmlOptions: {
+            disabled: true
+          },
+          pdfOptions: {
+            disabled: true
+          },
+          pdfdataOptions: {
+            disabled: true
+          },
+          csvOptions: {
+            disabled: true
+          },
+          xlsxOptions: {
+            disabled: true
+          },
+          jsonOptions: {
+            disabled: true
+          }
+        });
+
         let chart = root.container.children.push(
           am5map.MapChart.new(root, {
             projection: am5map[x.projection]()

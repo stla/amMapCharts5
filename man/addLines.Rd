@@ -50,7 +50,7 @@ line <- rbind(
   c(-0.454296, 51.470020),
   c(116.597504, 40.072498)
 )
-amMapChart() |>
+amMapChart() \%>\%
   addPolygons(continents, color = "orange", strokeColor = "black") \%>\%
   addLines(line, color = "purple", width = 3)
 }
