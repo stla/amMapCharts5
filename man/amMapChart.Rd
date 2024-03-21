@@ -13,19 +13,21 @@ amMapChart(
 )
 }
 \arguments{
-\item{projection}{the projection xxx}
+\item{projection}{the projection, one choice among \code{"equalEarth"},
+\code{"equirectangular"}, \code{"Mercator"}, \code{"naturalEarth1"} or
+\code{"orthographic"}}
 
 \item{grid}{list of settings for the grid; set to \code{NULL} for no grid}
 
 \item{width, height}{dimensions}
 
-\item{elementId}{a HTML id}
+\item{elementId}{a HTML id (usually useless)}
 }
 \value{
 An \code{amMapChart} widget.
 }
 \description{
-Initiate an \code{amMapChart} widget.
+Initiates an \code{amMapChart} widget.
 }
 \examples{
 library(amMapCharts5)

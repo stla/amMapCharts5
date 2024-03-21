@@ -1,10 +1,12 @@
 #' Chart widget
-#' @description Initiate an \code{amMapChart} widget.
+#' @description Initiates an \code{amMapChart} widget.
 #'
-#' @param projection the projection xxx
+#' @param projection the projection, one choice among \code{"equalEarth"},
+#'  \code{"equirectangular"}, \code{"Mercator"}, \code{"naturalEarth1"} or
+#'  \code{"orthographic"}
 #' @param grid list of settings for the grid; set to \code{NULL} for no grid
 #' @param width,height dimensions
-#' @param elementId a HTML id
+#' @param elementId a HTML id (usually useless)
 #'
 #' @returns An \code{amMapChart} widget.
 #'
