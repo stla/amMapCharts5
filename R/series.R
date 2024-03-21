@@ -53,17 +53,16 @@ addPolygons <- function(
   if(is.null(series)) {
     series <- list()
   }
-  n <- length(series)
-  series[[n+1L]] <- list(
+  series[[length(series) + 1L]] <- list(
     "type"    = "MapPolygonSeries",
     "data"    = data,
     "geojson" = geojson,
     "options" = emptyNamedList,
     "style"   =  list(
-      fill        = validateColor(color),
-      stroke      = validateColor(strokeColor),
-      strokeWidth = strokeWidth,
-      fillOpacity = opacity
+      "fill"        = validateColor(color),
+      "stroke"      = validateColor(strokeColor),
+      "strokeWidth" = strokeWidth,
+      "fillOpacity" = opacity
     )
   )
   map[["x"]][["series"]] <- series
@@ -152,7 +151,7 @@ addPoints <- function(
 #' @export
 #'
 #' @note A color can be given by the name of a R color, the name of a CSS
-#'   color, e.g. \code{"crimson"} or \code{"fuchsia"}, an HEX code like
+#'   color, e.g. \code{"lime"} or \code{"indigo"}, an HEX code like
 #'   \code{"#ff009a"}, a RGB code like \code{"rgb(255,100,39)"}, or a HSL code
 #'   like \code{"hsl(360,11,255)"}.
 #'
@@ -203,9 +202,56 @@ addLines <- function(
     "geojson" = geojson,
     "options" = list("lineType" = lineType),
     "style"   =  list(
-      stroke        = validateColor(color),
-      strokeWidth   = width,
-      strokeOpacity = opacity
+      "stroke"        = validateColor(color),
+      "strokeWidth"   = width,
+      "strokeOpacity" = opacity
+    )
+  )
+  map[["x"]][["series"]] <- series
+  map
+}
+
+#' Add a line with a plane to a map
+#' @description Add a line with a plane on it to an \code{amMapChart}.
+#'
+#' @param map an \code{amMapChart} widget
+#' @param coordinates coordinates for a single line, a numeric matrix with
+#'   two columns or a dataframe having two columns \code{longitude} and
+#'   \code{latitude}
+#' @param planePosition relative position of the plane on the line
+#' @param lineType,color,opacity,width see \code{\link{addLines}}
+#'
+#' @return An \code{amMapChart} widget.
+#' @export
+#'
+#' @examples
+addLineWithPlane <- function(
+    map, coordinates, planePosition = 0.5, lineType = "curved",
+    color = NULL, opacity = NULL, width = NULL
+) {
+  lineType <- match.arg(lineType, c("curved", "straight"))
+  if(is.data.frame(coordinates)) {
+    coordinates <- as.matrix(coordinates[, c("longitude", "latitude")])
+  }
+  dataItem <- list(
+    geometry = list(
+      "type"        = "LineString",
+      "coordinates" = unname(coordinates)
+    )
+  )
+  series <- map[["x"]][["series"]]
+  if(is.null(series)) {
+    series <- list()
+  }
+  series[[length(series) + 1L]] <- list(
+    "type"          = "lineWithPlane",
+    "planePosition" = planePosition,
+    "dataItem"      = dataItem,
+    "options"       = list("lineType" = lineType),
+    "style"         =  list(
+      "stroke"        = validateColor(color),
+      "strokeWidth"   = width,
+      "strokeOpacity" = opacity
     )
   )
   map[["x"]][["series"]] <- series
