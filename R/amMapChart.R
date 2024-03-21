@@ -66,26 +66,34 @@ amMapChart <- function(
   )
 }
 
-#' Shiny bindings for amMapChart
+#' Shiny bindings for 'amMapChart'
 #'
-#' Output and render functions for using amMapChart within Shiny
-#' applications and interactive Rmd documents.
+#' @description Output and render functions for using \code{amMapChart} within
+#'   Shiny applications and interactive Rmd documents.
 #'
 #' @param outputId output variable to read from
-#' @param width,height Must be a valid CSS unit (like \code{'100\%'},
-#'   \code{'400px'}, \code{'auto'}) or a number, which will be coerced to a
-#'   string and have \code{'px'} appended.
-#' @param expr An expression that generates a amMapChart
-#' @param env The environment in which to evaluate \code{expr}.
-#' @param quoted Is \code{expr} a quoted expression (with \code{quote()})? This
-#'   is useful if you want to save an expression in a variable.
+#' @param width,height a valid CSS dimension (like \code{"100\%"},
+#'   \code{"400px"}, \code{"auto"}) or a number, which will be coerced to a
+#'   string and have \code{"px"} appended
+#' @param expr an expression that generates an \code{\link{amMapChart}}
+#' @param env the environment in which to evaluate \code{expr}
+#' @param quoted logical, whether \code{expr} is a quoted expression
+#'   (with \code{quote()}); this is useful if you want to save an expression
+#'   in a variable
+#'
+#' @returns \code{amMapChartOutput} returns an output element that can be
+#'   included in a Shiny UI definition, and \code{renderAmMapChart} returns a
+#'   \code{shiny.render.function} object that can be included in a Shiny server
+#'   definition.
 #'
 #' @name amMapChart-shiny
 #'
 #' @export
 #' @importFrom htmlwidgets shinyWidgetOutput shinyRenderWidget
-amMapChartOutput <- function(outputId, width = '100%', height = '400px'){
-  shinyWidgetOutput(outputId, 'amMapChart', width, height, package = 'amMapCharts5')
+amMapChartOutput <- function(outputId, width = "100%", height = "400px"){
+  shinyWidgetOutput(
+    outputId, 'amMapChart', width, height, package = 'amMapCharts5'
+  )
 }
 
 #' @rdname amMapChart-shiny

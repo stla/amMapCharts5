@@ -4,7 +4,7 @@
 \alias{amMapChart-shiny}
 \alias{amMapChartOutput}
 \alias{renderAmMapChart}
-\title{Shiny bindings for amMapChart}
+\title{Shiny bindings for 'amMapChart'}
 \usage{
 amMapChartOutput(outputId, width = "100\%", height = "400px")
 
@@ -13,18 +13,25 @@ renderAmMapChart(expr, env = parent.frame(), quoted = FALSE)
 \arguments{
 \item{outputId}{output variable to read from}
 
-\item{width, height}{Must be a valid CSS unit (like \code{'100\%'},
-\code{'400px'}, \code{'auto'}) or a number, which will be coerced to a
-string and have \code{'px'} appended.}
+\item{width, height}{a valid CSS dimension (like \code{"100\%"},
+\code{"400px"}, \code{"auto"}) or a number, which will be coerced to a
+string and have \code{"px"} appended}
 
-\item{expr}{An expression that generates a amMapChart}
+\item{expr}{an expression that generates an \code{\link{amMapChart}}}
 
-\item{env}{The environment in which to evaluate \code{expr}.}
+\item{env}{the environment in which to evaluate \code{expr}}
 
-\item{quoted}{Is \code{expr} a quoted expression (with \code{quote()})? This
-is useful if you want to save an expression in a variable.}
+\item{quoted}{logical, whether \code{expr} is a quoted expression
+(with \code{quote()}); this is useful if you want to save an expression
+in a variable}
+}
+\value{
+\code{amMapChartOutput} returns an output element that can be
+  included in a Shiny UI definition, and \code{renderAmMapChart} returns a
+  \code{shiny.render.function} object that can be included in a Shiny server
+  definition.
 }
 \description{
-Output and render functions for using amMapChart within Shiny
-applications and interactive Rmd documents.
+Output and render functions for using \code{amMapChart} within
+  Shiny applications and interactive Rmd documents.
 }
