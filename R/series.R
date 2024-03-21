@@ -164,7 +164,7 @@ addPoints <- function(
 #'   c(-0.454296, 51.470020),
 #'   c(116.597504, 40.072498)
 #' )
-#' amMapChart() |>
+#' amMapChart() %>%
 #'   addPolygons(continents, color = "orange", strokeColor = "black") %>%
 #'   addLines(line, color = "purple", width = 3)
 addLines <- function(
@@ -225,6 +225,17 @@ addLines <- function(
 #' @export
 #'
 #' @examples
+#' library(amMapCharts5)
+#' continents <-
+#'   system.file("geojson", "continentsLow.json", package = "amMapCharts5")
+#' line <- rbind(
+#'   c(-73.778137, 40.641312),
+#'   c(-0.454296, 51.470020),
+#'   c(116.597504, 40.072498)
+#' )
+#' amMapChart(projection = "naturalEarth1") %>%
+#'   addPolygons(continents, color = "red", strokeColor = "black") %>%
+#'   addLineWithPlane(line, planePosition = 0.2, color = "lime", width = 2)
 addLineWithPlane <- function(
     map, coordinates, planePosition = 0.5, lineType = "curved",
     color = NULL, opacity = NULL, width = NULL

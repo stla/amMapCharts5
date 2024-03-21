@@ -2,6 +2,7 @@
 
 export("%>%")
 export(JS)
+export(addLineWithPlane)
 export(addLines)
 export(addPoints)
 export(addPolygons)
