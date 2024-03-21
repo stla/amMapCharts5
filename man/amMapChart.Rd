@@ -2,7 +2,7 @@
 % Please edit documentation in R/amMapChart.R
 \name{amMapChart}
 \alias{amMapChart}
-\title{<Add Title>}
+\title{Chart widget}
 \usage{
 amMapChart(
   projection = "Mercator",
@@ -12,6 +12,25 @@ amMapChart(
   elementId = NULL
 )
 }
+\arguments{
+\item{projection}{the projection xxx}
+
+\item{grid}{list of settings for the grid; set to \code{NULL} for no grid}
+
+\item{width, height}{dimensions}
+
+\item{elementId}{a HTML id}
+}
+\value{
+An \code{amMapChart} widget.
+}
 \description{
-<Add Description>
+Initiate an \code{amMapChart} widget.
+}
+\examples{
+library(amMapCharts5)
+world <-
+  system.file("geojson", "worldLow.json", package = "amMapCharts5")
+amMapChart(projection = "orthographic") \%>\%
+  addPolygons(world, color = "red", strokeColor = "black")
 }

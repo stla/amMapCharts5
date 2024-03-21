@@ -1,5 +1,5 @@
 library(amMapCharts5)
-continents <-
+world <-
   system.file("geojson", "worldLow.json", package = "amMapCharts5")
 line <- rbind(
   c(-73.778137, 40.641312),
@@ -7,7 +7,7 @@ line <- rbind(
   c(116.597504, 40.072498)
 )
 amMapChart(projection = "naturalEarth1") %>%
-  addPolygons(continents, color = "red", strokeColor = "black") %>%
+  addPolygons(world, color = "red", strokeColor = "black") %>%
   addLineWithPlane(line, planePosition = 0.2, color = "lime", width = 2)
 
 

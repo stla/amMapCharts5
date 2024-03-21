@@ -47,10 +47,10 @@ A color can be given by the name of a R color, the name of a CSS
 }
 \examples{
 library(amMapCharts5)
-continents <-
+world <-
   system.file("geojson", "worldLow.json", package = "amMapCharts5")
 amMapChart() \%>\%
   addPolygons(
-    continents, tooltipKey = "name", color = "red", strokeColor = "black"
+    world, tooltipKey = "name", color = "red", strokeColor = "black"
   )
 }

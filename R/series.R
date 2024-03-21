@@ -23,11 +23,11 @@
 #'
 #' @examples
 #' library(amMapCharts5)
-#' continents <-
+#' world <-
 #'   system.file("geojson", "worldLow.json", package = "amMapCharts5")
 #' amMapChart() %>%
 #'   addPolygons(
-#'     continents, tooltipKey = "name", color = "red", strokeColor = "black"
+#'     world, tooltipKey = "name", color = "red", strokeColor = "black"
 #'   )
 addPolygons <- function(
     map, coordinates, tooltipKey = NULL,

@@ -1,11 +1,23 @@
-#' <Add Title>
+#' Chart widget
+#' @description Initiate an \code{amMapChart} widget.
 #'
-#' <Add Description>
+#' @param projection the projection xxx
+#' @param grid list of settings for the grid; set to \code{NULL} for no grid
+#' @param width,height dimensions
+#' @param elementId a HTML id
 #'
+#' @returns An \code{amMapChart} widget.
+#'
+#' @export
 #' @importFrom htmlwidgets createWidget
 #' @importFrom htmltools htmlDependency
 #'
-#' @export
+#' @examples
+#' library(amMapCharts5)
+#' world <-
+#'   system.file("geojson", "worldLow.json", package = "amMapCharts5")
+#' amMapChart(projection = "orthographic") %>%
+#'   addPolygons(world, color = "red", strokeColor = "black")
 amMapChart <- function(
   projection = "Mercator",
   grid = list(step = 10, color = "black", opacity = 0.1),
