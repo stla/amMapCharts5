@@ -82,6 +82,18 @@ HTMLWidgets.widget({
 
         chart.set("zoomControl", am5map.ZoomControl.new(root, {}));
 
+        if (x.grid) {
+          let graticuleSeries = chart.series.unshift(
+            am5map.GraticuleSeries.new(root, {
+              step: x.grid.step
+            })
+          );
+          graticuleSeries.mapLines.template.setAll({
+            stroke: x.grid.color,
+            strokeOpacity: x.grid.opacity
+          });
+        }
+
         for (let xseries of x.series) {
           addSeries(root, chart, xseries);
         }

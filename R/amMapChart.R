@@ -7,7 +7,9 @@
 #'
 #' @export
 amMapChart <- function(
-  projection = "Mercator", width = NULL, height = NULL, elementId = NULL
+  projection = "Mercator",
+  grid = list(step = 10, color = "black", opacity = 0.1),
+  width = NULL, height = NULL, elementId = NULL
 ) {
   projections <- c(
     "equalEarth",
@@ -28,7 +30,8 @@ amMapChart <- function(
 
   # forward options using x
   x = list(
-    projection = geoProjections[projection][[1L]]
+    projection = geoProjections[projection][[1L]],
+    grid = grid
   )
 
   # create widget
