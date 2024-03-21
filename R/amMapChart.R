@@ -1,3 +1,22 @@
+geoProjections <- function() {
+  projections <- c(
+    "equalEarth",
+    "equirectangular",
+    "Mercator",
+    "naturalEarth1",
+    "orthographic"
+  )
+  gProjections <- c(
+    "geoEqualEarth",
+    "geoEquirectangular",
+    "geoMercator",
+    "geoNaturalEarth1",
+    "geoOrthographic"
+  )
+  names(gProjections) <- projections
+  gProjections
+}
+
 #' Chart widget
 #' @description Initiates an \code{amMapChart} widget.
 #'
@@ -25,26 +44,13 @@ amMapChart <- function(
   grid = list(step = 10, color = "black", opacity = 0.1),
   width = NULL, height = NULL, elementId = NULL
 ) {
-  projections <- c(
-    "equalEarth",
-    "equirectangular",
-    "Mercator",
-    "naturalEarth1",
-    "orthographic"
-  )
+  gProjections <- geoProjections()
+  projections <- names(gProjections)
   projection <- match.arg(projection, projections)
-  geoProjections <- c(
-    "geoEqualEarth",
-    "geoEquirectangular",
-    "geoMercator",
-    "geoNaturalEarth1",
-    "geoOrthographic"
-  )
-  names(geoProjections) <- projections
 
   # forward options using x
   x = list(
-    projection = geoProjections[projection][[1L]],
+    projection = gProjections[projection][[1L]],
     grid = grid
   )
 
@@ -104,3 +110,24 @@ renderAmMapChart <- function(expr, env = parent.frame(), quoted = FALSE) {
   if (!quoted) { expr <- substitute(expr) } # force quoted
   shinyRenderWidget(expr, amMapChartOutput, env, quoted = TRUE)
 }
+
+#' Title
+#'
+#' @param session
+#' @param inputId
+#' @param projection
+#'
+#' @return
+#' @export
+#'
+#' @examples
+updateAmMapChart <- function(session, inputId, projection) {
+  gProjections <- geoProjections()
+  projections  <- names(gProjections)
+  projection   <- match.arg(projection, projections)
+  gProjection  <- gProjections[projection][[1L]]
+  session$sendCustomMessage(
+    paste0("update_", inputID), list("projection" = gProjection)
+  )
+}
+

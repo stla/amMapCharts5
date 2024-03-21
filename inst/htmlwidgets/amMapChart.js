@@ -4,6 +4,8 @@ HTMLWidgets.widget({
   type: "output",
 
   factory: function (el, width, height) {
+    let inShiny = HTMLWidgets.shinyMode;
+
     let addSeries = function (root, chart, xseries) {
       let options = xseries.options;
       if (xseries.type === "lineWithPlane") {
@@ -121,6 +123,12 @@ HTMLWidgets.widget({
         }
 
         chart.appear(1000, 100);
+
+        if(inShiny) {
+          Shiny.addCustomMessageHandler("update_" + el.id, function(x) {
+            chart.set("projection", am5map[x.projection]());
+          });
+        }
       },
 
       resize: function (width, height) {
