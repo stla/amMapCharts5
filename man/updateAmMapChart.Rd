@@ -36,7 +36,7 @@ line <- rbind(
   c(-0.454296, 51.470020),
   c(116.597504, 40.072498)
 )
-map <- amMapChart(projection = "Mercator") \%>\%
+map <- amMapChart("Mercator", panX = "translateX", panY = "translateY") \%>\%
   addPolygons(world, color = "red", strokeColor = "black") \%>\%
   addLineWithPlane(line, planePosition = 0.2, color = "lime", width = 2)
 
@@ -54,6 +54,24 @@ ui <- fluidPage(
           "orthographic"
         ),
         selected = "Mercator"
+      ),
+      radioButtons(
+        "panX",
+        label = "Horizontal dragging (panX)",
+        choices = c(
+          "translateX",
+          "rotateX"
+        ),
+        selected = "translateX"
+      ),
+      radioButtons(
+        "panY",
+        label = "Vertical dragging (panY)",
+        choices = c(
+          "translateY",
+          "rotateY"
+        ),
+        selected = "translateY"
       )
     ),
     mainPanel(
@@ -71,6 +89,14 @@ server <- function(input, output, session) {
 
   observeEvent(input[["projection"]], {
     updateAmMapChart(session, "map", projection = input[["projection"]])
+  }, ignoreInit = TRUE)
+
+  observeEvent(input[["panX"]], {
+    updateAmMapChart(session, "map", panX = input[["panX"]])
+  }, ignoreInit = TRUE)
+
+  observeEvent(input[["panY"]], {
+    updateAmMapChart(session, "map", panY = input[["panY"]])
   }, ignoreInit = TRUE)
 
 }
