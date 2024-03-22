@@ -31,7 +31,6 @@ geoProjections <- function() {
 #'
 #' @export
 #' @importFrom htmlwidgets createWidget
-#' @importFrom htmltools htmlDependency
 #'
 #' @examples
 #' library(amMapCharts5)
@@ -61,16 +60,16 @@ amMapChart <- function(
     width = width,
     height = height,
     package = "amMapCharts5",
-    elementId = elementId,
-    dependencies = list(
-      htmlDependency(
-        name = "amcharts5",
-        version = "5.8.6",
-        src = "htmlwidgets/lib/amCharts5",
-        script = c("index.js", "map.js", "exporting.js"),
-        package = "amMapCharts5"
-      )
-    )
+    elementId = elementId
+    # dependencies = list(
+    #   htmlDependency(
+    #     name = "amcharts5",
+    #     version = "5.8.6",
+    #     src = "htmlwidgets/lib/amCharts5",
+    #     script = c("index.js", "map.js", "exporting.js"),
+    #     package = "amMapCharts5"
+    #   )
+    # )
   )
 }
 
@@ -111,13 +110,14 @@ renderAmMapChart <- function(expr, env = parent.frame(), quoted = FALSE) {
   shinyRenderWidget(expr, amMapChartOutput, env, quoted = TRUE)
 }
 
-#' Title
+#' Update an 'amMapChart' in Shiny
+#' @description Update an \code{amMapChart} widget in a Shiny app.
 #'
-#' @param session
-#' @param inputId
-#' @param projection
+#' @param session the Shiny session object
+#' @param inputId the id of the \code{amMapChart} widget to be updated
+#' @param projection the new projection
 #'
-#' @return
+#' @return No returned value.
 #' @export
 #'
 #' @examples
@@ -127,7 +127,7 @@ updateAmMapChart <- function(session, inputId, projection) {
   projection   <- match.arg(projection, projections)
   gProjection  <- gProjections[projection][[1L]]
   session$sendCustomMessage(
-    paste0("update_", inputID), list("projection" = gProjection)
+    paste0("update_", inputId), list("projection" = gProjection)
   )
 }
 

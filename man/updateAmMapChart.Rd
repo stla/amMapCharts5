@@ -2,13 +2,20 @@
 % Please edit documentation in R/amMapChart.R
 \name{updateAmMapChart}
 \alias{updateAmMapChart}
-\title{Title}
+\title{Update an 'amMapChart' in Shiny}
 \usage{
 updateAmMapChart(session, inputId, projection)
 }
 \arguments{
-\item{projection}{}
+\item{session}{the Shiny session object}
+
+\item{inputId}{the id of the \code{amMapChart} widget to be updated}
+
+\item{projection}{the new projection}
+}
+\value{
+No returned value.
 }
 \description{
-Title
+Update an \code{amMapChart} widget in a Shiny app.
 }

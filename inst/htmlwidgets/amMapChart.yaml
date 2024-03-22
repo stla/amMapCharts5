@@ -1,7 +1,8 @@
-# (uncomment to add a dependency)
-# dependencies:
-#  - name:
-#    version:
-#    src:
-#    script:
-#    stylesheet:
+dependencies:
+ - name: amcharts5
+   version: 5.8.6
+   src: htmlwidgets/lib/amCharts5
+   script:
+    - index.js
+    - map.js
+    - exporting.js

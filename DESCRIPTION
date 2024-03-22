@@ -9,7 +9,6 @@ URL: https://github.com/stla/amMapCharts5
 BugReports: https://github.com/stla/amMapCharts5/issues
 Imports: 
     htmlwidgets,
-    htmltools,
     grDevices,
     magrittr
 Encoding: UTF-8

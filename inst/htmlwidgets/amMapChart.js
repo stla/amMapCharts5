@@ -74,6 +74,7 @@ HTMLWidgets.widget({
 
     return {
       renderValue: function (x) {
+
         let root = am5.Root.new(el.id);
 
         let exporting = am5plugins_exporting.Exporting.new(root, {
@@ -125,10 +126,11 @@ HTMLWidgets.widget({
         chart.appear(1000, 100);
 
         if(inShiny) {
-          Shiny.addCustomMessageHandler("update_" + el.id, function(x) {
-            chart.set("projection", am5map[x.projection]());
+          Shiny.addCustomMessageHandler("update_" + el.id, function(a) {
+            chart.set("projection", am5map[a.projection]());
           });
         }
+
       },
 
       resize: function (width, height) {
