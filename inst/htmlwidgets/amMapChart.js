@@ -86,7 +86,9 @@ HTMLWidgets.widget({
         } else if (xseries.type === "ClusteredPointSeries") {
           let cluster = xseries.cluster;
           series.set("clusteredBullet", function (root) {
-            let container = am5.Container.new(root, {});
+            let container = am5.Container.new(root, {
+              cursorOverStyle: "pointer"
+            });
             let circle1 = container.children.push(
               am5.Circle.new(root, {
                 radius: cluster.radius,
@@ -168,7 +170,9 @@ HTMLWidgets.widget({
 
         let chart = root.container.children.push(
           am5map.MapChart.new(root, {
-            projection: am5map[x.projection]()
+            projection: am5map[x.projection](),
+            panX: x.panX,
+            panY: x.panY
           })
         );
 
@@ -194,7 +198,15 @@ HTMLWidgets.widget({
 
         if (inShiny) {
           Shiny.addCustomMessageHandler("update_" + el.id, function (a) {
-            chart.set("projection", am5map[a.projection]());
+            if(a.projection) {
+              chart.set("projection", am5map[a.projection]());
+            }
+            if(a.panX) {
+              chart.set("panX", a.panX)
+            }
+            if(a.panY) {
+              chart.set("panY", a.panY)
+            }
           });
         }
       },

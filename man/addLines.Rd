@@ -8,9 +8,9 @@ addLines(
   map,
   coordinates,
   lineType = "curved",
-  color = NULL,
+  color = "red",
   opacity = 1,
-  width = NULL
+  width = 3
 )
 }
 \arguments{

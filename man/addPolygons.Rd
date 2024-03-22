@@ -8,9 +8,9 @@ addPolygons(
   map,
   coordinates,
   tooltipKey = NULL,
-  color = NULL,
+  color = "springgreen",
   opacity = 1,
-  strokeColor = NULL,
+  strokeColor = "black",
   strokeWidth = NULL
 )
 }

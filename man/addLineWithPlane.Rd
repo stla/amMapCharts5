@@ -9,9 +9,9 @@ addLineWithPlane(
   coordinates,
   planePosition = 0.5,
   lineType = "curved",
-  color = NULL,
+  color = "red",
   opacity = 1,
-  width = NULL
+  width = 3
 )
 }
 \arguments{
@@ -21,7 +21,8 @@ addLineWithPlane(
 two columns or a dataframe having two columns \code{longitude} and
 \code{latitude}}
 
-\item{planePosition}{relative position of the plane on the line}
+\item{planePosition}{relative position of the plane on the line
+(0: beginning, 1: end)}
 
 \item{lineType, color, opacity, width}{see \code{\link{addLines}}}
 }

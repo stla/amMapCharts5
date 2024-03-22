@@ -31,7 +31,8 @@
 #'   )
 addPolygons <- function(
     map, coordinates, tooltipKey = NULL,
-    color = NULL, opacity = 1, strokeColor = NULL, strokeWidth = NULL
+    color = "springgreen", opacity = 1,
+    strokeColor = "black", strokeWidth = NULL
 ) {
   geojson <- NULL
   data    <- NULL
@@ -96,7 +97,7 @@ addPolygons <- function(
 #'   addPolygons(continents, color = "orange", strokeColor = "black") %>%
 #'   addPoints(cities, amCircle(color = "black", radius = 3))
 addPoints <- function(
-    map, coordinates, bullet
+    map, coordinates, bullet = amCircle("darkred")
 ) {
   geojson <- NULL
   data    <- NULL
@@ -174,7 +175,7 @@ addPoints <- function(
 #'   addLines(line, color = "purple", width = 3)
 addLines <- function(
     map, coordinates, lineType = "curved",
-    color = NULL, opacity = 1, width = NULL
+    color = "red", opacity = 1, width = 3
 ) {
   lineType <- match.arg(lineType, c("curved", "straight"))
   geojson <- NULL
@@ -224,6 +225,7 @@ addLines <- function(
 #'   two columns or a dataframe having two columns \code{longitude} and
 #'   \code{latitude}
 #' @param planePosition relative position of the plane on the line
+#'   (0: beginning, 1: end)
 #' @param lineType,color,opacity,width see \code{\link{addLines}}
 #'
 #' @return An \code{amMapChart} widget.
@@ -243,7 +245,7 @@ addLines <- function(
 #'   addLineWithPlane(line, planePosition = 0.2, color = "lime", width = 2)
 addLineWithPlane <- function(
     map, coordinates, planePosition = 0.5, lineType = "curved",
-    color = NULL, opacity = 1, width = NULL
+    color = "red", opacity = 1, width = 3
 ) {
   lineType <- match.arg(lineType, c("curved", "straight"))
   if(is.data.frame(coordinates)) {
@@ -275,7 +277,8 @@ addLineWithPlane <- function(
 }
 
 #' Add clustered points to a map
-#' @description Add some clustered points to an \code{amMapChart}.
+#' @description Add some clustered points to an \code{amMapChart} (points close
+#'   to each other are grouped).
 #'
 #' @param map an \code{amMapChart} widget
 #' @param coordinates this can be a matrix with two columns, or a dataframe

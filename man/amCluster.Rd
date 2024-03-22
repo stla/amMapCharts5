@@ -19,6 +19,6 @@ amCluster(color = NULL, radius = 6, labelColor = "black", fontSize = 9)
 A list of settings for the clusters.
 }
 \description{
-Settings of clusters for usage in
-  \code{\link{addClusteredPoints}}.
+Settings of clusters for usage in the \code{cluster} argument
+  of \code{\link{addClusteredPoints}}.
 }

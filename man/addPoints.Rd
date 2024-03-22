@@ -4,7 +4,7 @@
 \alias{addPoints}
 \title{Add points to a map}
 \usage{
-addPoints(map, coordinates, bullet)
+addPoints(map, coordinates, bullet = amCircle("darkred"))
 }
 \arguments{
 \item{map}{an \code{amMapChart} widget}

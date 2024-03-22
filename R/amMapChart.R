@@ -23,6 +23,7 @@ geoProjections <- function() {
 #' @param projection the projection, one choice among \code{"equalEarth"},
 #'  \code{"equirectangular"}, \code{"Mercator"}, \code{"naturalEarth1"} or
 #'  \code{"orthographic"}
+#' @param panX,panY see \href{https://www.amcharts.com/docs/v5/charts/map-chart/map-pan-zoom/#Panning}{Panning}
 #' @param grid list of settings for the grid; set to \code{NULL} for no grid
 #' @param width,height dimensions
 #' @param elementId a HTML id (usually useless)
@@ -36,21 +37,26 @@ geoProjections <- function() {
 #' library(amMapCharts5)
 #' world <-
 #'   system.file("geojson", "worldLow.json", package = "amMapCharts5")
-#' amMapChart(projection = "orthographic") %>%
+#' amMapChart("orthographic", panX = "rotateX", panY = "rotateY") %>%
 #'   addPolygons(world, color = "red", strokeColor = "black")
 amMapChart <- function(
-  projection = "Mercator",
-  grid = list(step = 10, color = "black", opacity = 0.1),
+  projection = "Mercator", panX = "translateX", panY = "translateY",
+  grid = list(step = 10, color = "black", opacity = 0.2),
   width = NULL, height = NULL, elementId = NULL
 ) {
+  panX <- match.arg(panX, c("none", "translateX", "rotateX"))
+  panY <- match.arg(panY, c("none", "translateY", "rotateY"))
+
   gProjections <- geoProjections()
-  projections <- names(gProjections)
-  projection <- match.arg(projection, projections)
+  projections  <- names(gProjections)
+  projection   <- match.arg(projection, projections)
 
   # forward options using x
   grid[["color"]] <- validateColor(grid[["color"]])
   x = list(
     projection = gProjections[projection][[1L]],
+    panX = panX,
+    panY = panY,
     grid = grid
   )
 
@@ -62,15 +68,6 @@ amMapChart <- function(
     height = height,
     package = "amMapCharts5",
     elementId = elementId
-    # dependencies = list(
-    #   htmlDependency(
-    #     name = "amcharts5",
-    #     version = "5.8.6",
-    #     src = "htmlwidgets/lib/amCharts5",
-    #     script = c("index.js", "map.js", "exporting.js"),
-    #     package = "amMapCharts5"
-    #   )
-    # )
   )
 }
 
@@ -117,6 +114,8 @@ renderAmMapChart <- function(expr, env = parent.frame(), quoted = FALSE) {
 #' @param session the Shiny session object
 #' @param inputId the id of the \code{amMapChart} widget to be updated
 #' @param projection the new projection
+#' @param panX the new \code{panX} value
+#' @param panY the new \code{panY} value
 #'
 #' @return No returned value.
 #' @export
@@ -175,13 +174,28 @@ renderAmMapChart <- function(expr, env = parent.frame(), quoted = FALSE) {
 #'
 #' shinyApp(ui, server)
 #' }
-updateAmMapChart <- function(session, inputId, projection) {
-  gProjections <- geoProjections()
-  projections  <- names(gProjections)
-  projection   <- match.arg(projection, projections)
-  gProjection  <- gProjections[projection][[1L]]
+updateAmMapChart <- function(
+    session, inputId, projection = NULL, panX = NULL, panY = NULL
+) {
+  if(!is.null(projection)) {
+    gProjections <- geoProjections()
+    projections  <- names(gProjections)
+    projection   <- match.arg(projection, projections)
+    projection   <- gProjections[projection][[1L]]
+  }
+  if(!is.null(panX)) {
+    panX <- match.arg(panX, c("none", "translateX", "rotateX"))
+    panY <- match.arg(panY, c("none", "translateY", "rotateY"))
+  }
+  if(!is.null(panY)) {
+    panY <- match.arg(panY, c("none", "translateY", "rotateY"))
+  }
+  message <- Filter(
+    Negate(is.null),
+    list("projection" = projection, "panX" = panX, "panY" = panY)
+  )
   session$sendCustomMessage(
-    paste0("update_", inputId), list("projection" = gProjection)
+    paste0("update_", inputId), message
   )
 }
 

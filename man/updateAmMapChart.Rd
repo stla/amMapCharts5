@@ -4,7 +4,7 @@
 \alias{updateAmMapChart}
 \title{Update an 'amMapChart' in Shiny}
 \usage{
-updateAmMapChart(session, inputId, projection)
+updateAmMapChart(session, inputId, projection = NULL, panX = NULL, panY = NULL)
 }
 \arguments{
 \item{session}{the Shiny session object}
@@ -12,6 +12,10 @@ updateAmMapChart(session, inputId, projection)
 \item{inputId}{the id of the \code{amMapChart} widget to be updated}
 
 \item{projection}{the new projection}
+
+\item{panX}{the new \code{panX} value}
+
+\item{panY}{the new \code{panY} value}
 }
 \value{
 No returned value.

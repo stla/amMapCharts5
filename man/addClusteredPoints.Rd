@@ -39,7 +39,8 @@ between each other will be grouped}
 An \code{amMapChart} widget.
 }
 \description{
-Add some clustered points to an \code{amMapChart}.
+Add some clustered points to an \code{amMapChart} (points close
+  to each other are grouped).
 }
 \examples{
 library(amMapCharts5)

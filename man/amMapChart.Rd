@@ -6,7 +6,9 @@
 \usage{
 amMapChart(
   projection = "Mercator",
-  grid = list(step = 10, color = "black", opacity = 0.1),
+  panX = "translateX",
+  panY = "translateY",
+  grid = list(step = 10, color = "black", opacity = 0.2),
   width = NULL,
   height = NULL,
   elementId = NULL
@@ -16,6 +18,8 @@ amMapChart(
 \item{projection}{the projection, one choice among \code{"equalEarth"},
 \code{"equirectangular"}, \code{"Mercator"}, \code{"naturalEarth1"} or
 \code{"orthographic"}}
+
+\item{panX, panY}{see \href{https://www.amcharts.com/docs/v5/charts/map-chart/map-pan-zoom/#Panning}{Panning}}
 
 \item{grid}{list of settings for the grid; set to \code{NULL} for no grid}
 
@@ -33,6 +37,6 @@ Initiates an \code{amMapChart} widget.
 library(amMapCharts5)
 world <-
   system.file("geojson", "worldLow.json", package = "amMapCharts5")
-amMapChart(projection = "orthographic") \%>\%
+amMapChart("orthographic", panX = "rotateX", panY = "rotateY") \%>\%
   addPolygons(world, color = "red", strokeColor = "black")
 }
