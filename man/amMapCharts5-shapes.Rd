@@ -21,7 +21,7 @@ amTriangle(
 amCircle(
   color = NULL,
   opacity = 1,
-  radius = 6,
+  radius = 4,
   strokeColor = NULL,
   strokeOpacity = 1,
   strokeWidth = 2

@@ -23,14 +23,14 @@
 #'
 #' @name amMapCharts5-shapes
 amTriangle <- function(
-  color = NULL,
-  opacity = 1,
-  width = 10,
-  height = 10,
-  strokeColor = NULL,
-  strokeOpacity = 1,
-  strokeWidth = 2,
-  rotation = 0
+    color = NULL,
+    opacity = 1,
+    width = 10,
+    height = 10,
+    strokeColor = NULL,
+    strokeOpacity = 1,
+    strokeWidth = 2,
+    rotation = 0
 ){
   bullet <- list(
     shape = "Triangle",
@@ -52,12 +52,12 @@ amTriangle <- function(
 #' @rdname amMapCharts5-shapes
 #' @export
 amCircle <- function(
-  color = NULL,
-  opacity = 1,
-  radius = 6,
-  strokeColor = NULL,
-  strokeOpacity = 1,
-  strokeWidth = 2
+    color = NULL,
+    opacity = 1,
+    radius = 4,
+    strokeColor = NULL,
+    strokeOpacity = 1,
+    strokeWidth = 2
 ){
   bullet <- list(
     shape = "Circle",
@@ -77,15 +77,15 @@ amCircle <- function(
 #' @rdname amMapCharts5-shapes
 #' @export
 amRectangle <- function(
-  color = NULL,
-  opacity = 1,
-  width = 10,
-  height = 10,
-  strokeColor = NULL,
-  strokeOpacity = 1,
-  strokeWidth = 2,
-  rotation = 0,
-  cornerRadius = 3
+    color = NULL,
+    opacity = 1,
+    width = 10,
+    height = 10,
+    strokeColor = NULL,
+    strokeOpacity = 1,
+    strokeWidth = 2,
+    rotation = 0,
+    cornerRadius = 3
 ){
   bullet <- list(
     shape = "Rectangle",
@@ -103,4 +103,31 @@ amRectangle <- function(
   )
   class(bullet) <- "bullet"
   bullet
+}
+
+#' Cluster settings
+#' @description Settings of clusters for usage in
+#'   \code{\link{addClusteredPoints}}.
+#'
+#' @param color color
+#' @param radius radius
+#' @param labelColor label color
+#' @param fontSize label font size
+#'
+#' @return A list of settings for the clusters.
+#' @export
+amCluster <- function(
+    color = NULL,
+    radius = 6,
+    labelColor = "black",
+    fontSize = 8
+){
+  cluster <- list(
+    color = validateColor(color),
+    radius = radius,
+    labelColor = labelColor,
+    fontSize = fontSize
+  )
+  class(cluster) <- "cluster"
+  cluster
 }

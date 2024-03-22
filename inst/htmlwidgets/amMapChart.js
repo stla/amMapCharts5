@@ -69,57 +69,56 @@ HTMLWidgets.widget({
             });
           });
         } else if (xseries.type === "ClusteredPointSeries") {
+          let cluster = xseries.cluster;
           series.set("clusteredBullet", function (root) {
-            var container = am5.Container.new(root, {});
-            var circle1 = container.children.push(
+            let container = am5.Container.new(root, {});
+            let circle1 = container.children.push(
               am5.Circle.new(root, {
-                radius: 8,
+                radius: cluster.radius,
                 tooltipY: 0,
-                fill: am5.color(0xff8c00)
+                fill: cluster.color
               })
             );
-
-            var circle2 = container.children.push(
+            let circle2 = container.children.push(
               am5.Circle.new(root, {
-                radius: 12,
+                radius: cluster.radius + 4,
                 fillOpacity: 0.3,
                 tooltipY: 0,
-                fill: am5.color(0xff8c00)
+                fill: cluster.color
               })
             );
-
-            var circle3 = container.children.push(
+            let circle3 = container.children.push(
               am5.Circle.new(root, {
-                radius: 16,
+                radius: cluster.radius + 8,
                 fillOpacity: 0.3,
                 tooltipY: 0,
-                fill: am5.color(0xff8c00)
+                fill: cluster.color
               })
             );
-
-            var label = container.children.push(
+            let label = container.children.push(
               am5.Label.new(root, {
                 centerX: am5.p50,
                 centerY: am5.p50,
-                fill: am5.color(0xffffff),
+                fill: cluster.labelColor,
                 populateText: true,
-                fontSize: "8",
+                fontSize: cluster.fontSize,
                 text: "{value}"
               })
             );
-
+            container.events.on("click", function (e) {
+              pointSeries.zoomToCluster(e.target.dataItem);
+            });
             return am5.Bullet.new(root, {
               sprite: container
             });
           });
-                  series.bullets.push(function () {
-          return am5.Bullet.new(root, {
-            sprite: am5[xseries.bullet.shape].new(root, {
-              ...xseries.bullet.options
-            })
+          series.bullets.push(function () {
+            return am5.Bullet.new(root, {
+              sprite: am5[xseries.bullet.shape].new(root, {
+                ...xseries.bullet.options
+              })
+            });
           });
-        });
-
         }
       }
     };

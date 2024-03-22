@@ -11,7 +11,8 @@ addClusteredPoints(
   scatterDistance = 10,
   scatterRadius = 10,
   stopClusterZoom = 0.95,
-  bullet
+  bullet = amCircle("black"),
+  cluster = amCluster("orange")
 )
 }
 \arguments{
@@ -32,6 +33,9 @@ file}
 
 \item{bullet}{list of settings for the bullets created with
 \code{\link{amCircle}}, \code{\link{amTriangle}} or \code{\link{amRectangle}}}
+
+\item{cluster}{list of settings for the clusters created with
+\code{\link{amCluster}}}
 }
 \value{
 An \code{amMapChart} widget.

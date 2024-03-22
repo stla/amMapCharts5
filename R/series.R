@@ -288,13 +288,15 @@ addLineWithPlane <- function(
 #' @param stopClusterZoom xx
 #' @param bullet list of settings for the bullets created with
 #'   \code{\link{amCircle}}, \code{\link{amTriangle}} or \code{\link{amRectangle}}
+#' @param cluster list of settings for the clusters created with
+#'   \code{\link{amCluster}}
 #'
 #' @return An \code{amMapChart} widget.
 #' @export
 addClusteredPoints <- function(
     map, coordinates, minDistance = 20,
     scatterDistance = 10, scatterRadius = 10, stopClusterZoom = 0.95,
-    bullet
+    bullet = amCircle("black"), cluster = amCluster("orange")
 ) {
   geojson <- NULL
   data    <- NULL
@@ -336,7 +338,8 @@ addClusteredPoints <- function(
       "scatterRadius"   = scatterRadius,
       "stopClusterZoom" = stopClusterZoom
     ),
-    "bullet"  = bullet
+    "bullet"  = bullet,
+    "cluster" = cluster
   )
   map[["x"]][["series"]] <- series
   map
