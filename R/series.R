@@ -273,3 +273,71 @@ addLineWithPlane <- function(
   map[["x"]][["series"]] <- series
   map
 }
+
+#' Add clustered points to a map
+#' @description Add some clustered points to an \code{amMapChart}.
+#'
+#' @param map an \code{amMapChart} widget
+#' @param coordinates this can be a matrix with two columns, or a dataframe
+#'    having two columns \code{longitude} and \code{latitude} and optionally
+#'    a column \code{name} for the tooltips, or the path to a \strong{geojson}
+#'    file
+#' @param minDistance xx
+#' @param scatterDistance xx
+#' @param scatterRadius xx
+#' @param stopClusterZoom xx
+#' @param bullet list of settings for the bullets created with
+#'   \code{\link{amCircle}}, \code{\link{amTriangle}} or \code{\link{amRectangle}}
+#'
+#' @return An \code{amMapChart} widget.
+#' @export
+addClusteredPoints <- function(
+    map, coordinates, minDistance = 20,
+    scatterDistance = 10, scatterRadius = 10, stopClusterZoom = 0.95,
+    bullet
+) {
+  geojson <- NULL
+  data    <- NULL
+  if(is.character(coordinates)) {
+    geojson <- paste0(suppressWarnings(readLines(coordinates)), collapse = "\n")
+  } else {
+    if(is.matrix(coordinates)) {
+      colnames(coordinates) <- c("longitude", "latitude")
+      coordinates <- as.data.frame(coordinates)
+    }
+    if(!is.element("name", colnames(coordinates))) {
+      coordinates[["name"]] <- NA
+    } else {
+      bullet[["options"]][["tooltipY"]]    <- 0L
+      bullet[["options"]][["tooltipText"]] <- "{name}"
+    }
+    coordinates <- unname(split(coordinates, 1L:nrow(coordinates)))
+    data <- lapply(coordinates, function(row) {
+      list(
+        geometry = list(
+          "type"        = "Point",
+          "coordinates" = as.numeric(row[, c("longitude", "latitude")])
+        ),
+        name = row[["name"]]
+      )
+    })
+  }
+  series <- map[["x"]][["series"]]
+  if(is.null(series)) {
+    series <- list()
+  }
+  series[[length(series) + 1L]] <- list(
+    "type"    = "ClusteredPointSeries",
+    "data"    = data,
+    "geojson" = geojson,
+    "options" = list(
+      "minDistance"     = minDistance,
+      "scatterDistance" = scatterDistance,
+      "scatterRadius"   = scatterRadius,
+      "stopClusterZoom" = stopClusterZoom
+    ),
+    "bullet"  = bullet
+  )
+  map[["x"]][["series"]] <- series
+  map
+}

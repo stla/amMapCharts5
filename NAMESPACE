@@ -2,6 +2,7 @@
 
 export("%>%")
 export(JS)
+export(addClusteredPoints)
 export(addLineWithPlane)
 export(addLines)
 export(addPoints)

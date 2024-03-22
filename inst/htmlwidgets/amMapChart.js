@@ -68,13 +68,64 @@ HTMLWidgets.widget({
               })
             });
           });
+        } else if (xseries.type === "ClusteredPointSeries") {
+          series.set("clusteredBullet", function (root) {
+            var container = am5.Container.new(root, {});
+            var circle1 = container.children.push(
+              am5.Circle.new(root, {
+                radius: 8,
+                tooltipY: 0,
+                fill: am5.color(0xff8c00)
+              })
+            );
+
+            var circle2 = container.children.push(
+              am5.Circle.new(root, {
+                radius: 12,
+                fillOpacity: 0.3,
+                tooltipY: 0,
+                fill: am5.color(0xff8c00)
+              })
+            );
+
+            var circle3 = container.children.push(
+              am5.Circle.new(root, {
+                radius: 16,
+                fillOpacity: 0.3,
+                tooltipY: 0,
+                fill: am5.color(0xff8c00)
+              })
+            );
+
+            var label = container.children.push(
+              am5.Label.new(root, {
+                centerX: am5.p50,
+                centerY: am5.p50,
+                fill: am5.color(0xffffff),
+                populateText: true,
+                fontSize: "8",
+                text: "{value}"
+              })
+            );
+
+            return am5.Bullet.new(root, {
+              sprite: container
+            });
+          });
+                  series.bullets.push(function () {
+          return am5.Bullet.new(root, {
+            sprite: am5[xseries.bullet.shape].new(root, {
+              ...xseries.bullet.options
+            })
+          });
+        });
+
         }
       }
     };
 
     return {
       renderValue: function (x) {
-
         let root = am5.Root.new(el.id);
 
         let exporting = am5plugins_exporting.Exporting.new(root, {
@@ -125,12 +176,11 @@ HTMLWidgets.widget({
 
         chart.appear(1000, 100);
 
-        if(inShiny) {
-          Shiny.addCustomMessageHandler("update_" + el.id, function(a) {
+        if (inShiny) {
+          Shiny.addCustomMessageHandler("update_" + el.id, function (a) {
             chart.set("projection", am5map[a.projection]());
           });
         }
-
       },
 
       resize: function (width, height) {
