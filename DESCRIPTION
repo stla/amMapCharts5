@@ -11,6 +11,7 @@ Imports:
     htmlwidgets,
     grDevices,
     magrittr
+Suggests: shiny
 Encoding: UTF-8
 RoxygenNote: 7.3.1
 Depends: 

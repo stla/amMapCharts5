@@ -1,13 +1,6 @@
 library(amMapCharts5)
 library(shiny)
 
-js <- '
-var d = document.currentScript;
-console.log(d);
-var e = document.getElementsByTagName("script");
-console.log(e);
-'
-
 world <-
   system.file("geojson", "worldLow.json", package = "amMapCharts5")
 line <- rbind(
@@ -20,15 +13,6 @@ map <- amMapChart(projection = "Mercator") %>%
   addLineWithPlane(line, planePosition = 0.2, color = "lime", width = 2)
 
 ui <- fluidPage(
-  # tagList(
-  #   htmltools::htmlDependency(
-  #     name = "amcharts5",
-  #     version = "5.8.6",
-  #     src = "htmlwidgets/lib/amCharts5",
-  #     script = c("index.js", "map.js", "exporting.js"),
-  #     package = "amMapCharts5"
-  #   )
-  # ),
   sidebarLayout(
     sidebarPanel(
       radioButtons(
@@ -46,7 +30,7 @@ ui <- fluidPage(
     ),
     mainPanel(
       br(),
-      amMapChartOutput("map", height = 300)
+      amMapChartOutput("map")
     )
   )
 )
@@ -60,6 +44,7 @@ server <- function(input, output, session) {
   observeEvent(input[["projection"]], {
     updateAmMapChart(session, "map", projection = input[["projection"]])
   }, ignoreInit = TRUE)
+
 }
 
 shinyApp(ui, server)
