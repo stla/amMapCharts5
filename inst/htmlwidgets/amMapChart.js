@@ -6,13 +6,24 @@ HTMLWidgets.widget({
   factory: function (el, width, height) {
     let inShiny = HTMLWidgets.shinyMode;
 
+    let am5color = function(style) {
+      if(style.fill) {
+        style.fill = am5.color(style.fill);
+      }
+      if(style.stroke) {
+        style.stroke = am5.color(style.stroke);
+      }
+    };
+
     let addSeries = function (root, chart, xseries) {
       let options = xseries.options;
       if (xseries.type === "lineWithPlane") {
         let lineSeries = chart.series.push(
           am5map["MapLineSeries"].new(root, options)
         );
-        lineSeries["mapLines"].template.setAll(xseries.style);
+        let style = xseries.style;
+        am5color(style);
+        lineSeries["mapLines"].template.setAll(style);
         let route = lineSeries.pushDataItem(xseries.dataItem);
         let pointSeries = chart.series.push(
           am5map.MapPointSeries.new(root, {})
@@ -59,12 +70,16 @@ HTMLWidgets.widget({
             default:
               tmplt = "xxx";
           }
-          series[tmplt].template.setAll(xseries.style);
+          let style = xseries.style;
+          am5color(style);
+          series[tmplt].template.setAll(style);
         } else if (xseries.type === "MapPointSeries") {
+          let bulletOptions = xseries.bullet.options;
+          am5color(bulletOptions);
           series.bullets.push(function () {
             return am5.Bullet.new(root, {
               sprite: am5[xseries.bullet.shape].new(root, {
-                ...xseries.bullet.options
+                ...bulletOptions
               })
             });
           });
@@ -76,7 +91,7 @@ HTMLWidgets.widget({
               am5.Circle.new(root, {
                 radius: cluster.radius,
                 tooltipY: 0,
-                fill: cluster.color
+                fill: am5.color(cluster.color)
               })
             );
             let circle2 = container.children.push(
@@ -84,7 +99,7 @@ HTMLWidgets.widget({
                 radius: cluster.radius + 4,
                 fillOpacity: 0.3,
                 tooltipY: 0,
-                fill: cluster.color
+                fill: am5.color(cluster.color)
               })
             );
             let circle3 = container.children.push(
@@ -92,7 +107,7 @@ HTMLWidgets.widget({
                 radius: cluster.radius + 8,
                 fillOpacity: 0.3,
                 tooltipY: 0,
-                fill: cluster.color
+                fill: am5.color(cluster.color)
               })
             );
             let label = container.children.push(
@@ -106,16 +121,18 @@ HTMLWidgets.widget({
               })
             );
             container.events.on("click", function (e) {
-              pointSeries.zoomToCluster(e.target.dataItem);
+              series.zoomToCluster(e.target.dataItem);
             });
             return am5.Bullet.new(root, {
               sprite: container
             });
           });
+          let bulletOptions = xseries.bullet.options;
+          am5color(bulletOptions);
           series.bullets.push(function () {
             return am5.Bullet.new(root, {
               sprite: am5[xseries.bullet.shape].new(root, {
-                ...xseries.bullet.options
+                ...bulletOptions
               })
             });
           });
@@ -164,7 +181,7 @@ HTMLWidgets.widget({
             })
           );
           graticuleSeries.mapLines.template.setAll({
-            stroke: x.grid.color,
+            stroke: am5.color(x.grid.color),
             strokeOpacity: x.grid.opacity
           });
         }

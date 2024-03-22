@@ -48,6 +48,7 @@ amMapChart <- function(
   projection <- match.arg(projection, projections)
 
   # forward options using x
+  grid[["color"]] <- validateColor(grid[["color"]])
   x = list(
     projection = gProjections[projection][[1L]],
     grid = grid

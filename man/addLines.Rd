@@ -9,7 +9,7 @@ addLines(
   coordinates,
   lineType = "curved",
   color = NULL,
-  opacity = NULL,
+  opacity = 1,
   width = NULL
 )
 }

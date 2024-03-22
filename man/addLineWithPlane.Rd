@@ -10,7 +10,7 @@ addLineWithPlane(
   planePosition = 0.5,
   lineType = "curved",
   color = NULL,
-  opacity = NULL,
+  opacity = 1,
   width = NULL
 )
 }

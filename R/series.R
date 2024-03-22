@@ -31,7 +31,7 @@
 #'   )
 addPolygons <- function(
     map, coordinates, tooltipKey = NULL,
-    color = NULL, opacity = NULL, strokeColor = NULL, strokeWidth = NULL
+    color = NULL, opacity = 1, strokeColor = NULL, strokeWidth = NULL
 ) {
   geojson <- NULL
   data    <- NULL
@@ -174,7 +174,7 @@ addPoints <- function(
 #'   addLines(line, color = "purple", width = 3)
 addLines <- function(
     map, coordinates, lineType = "curved",
-    color = NULL, opacity = NULL, width = NULL
+    color = NULL, opacity = 1, width = NULL
 ) {
   lineType <- match.arg(lineType, c("curved", "straight"))
   geojson <- NULL
@@ -243,7 +243,7 @@ addLines <- function(
 #'   addLineWithPlane(line, planePosition = 0.2, color = "lime", width = 2)
 addLineWithPlane <- function(
     map, coordinates, planePosition = 0.5, lineType = "curved",
-    color = NULL, opacity = NULL, width = NULL
+    color = NULL, opacity = 1, width = NULL
 ) {
   lineType <- match.arg(lineType, c("curved", "straight"))
   if(is.data.frame(coordinates)) {

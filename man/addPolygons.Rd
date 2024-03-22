@@ -9,7 +9,7 @@ addPolygons(
   coordinates,
   tooltipKey = NULL,
   color = NULL,
-  opacity = NULL,
+  opacity = 1,
   strokeColor = NULL,
   strokeWidth = NULL
 )
