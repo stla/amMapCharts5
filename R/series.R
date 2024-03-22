@@ -282,10 +282,10 @@ addLineWithPlane <- function(
 #'    having two columns \code{longitude} and \code{latitude} and optionally
 #'    a column \code{name} for the tooltips, or the path to a \strong{geojson}
 #'    file
-#' @param minDistance xx
-#' @param scatterDistance xx
-#' @param scatterRadius xx
-#' @param stopClusterZoom xx
+#' @param minDistance number of pixels; bullets closer than this distance
+#'   between each other will be grouped
+#' @param scatterDistance,scatterRadius,stopClusterZoom see
+#'   \href{https://www.amcharts.com/docs/v5/charts/map-chart/clustered-point-series/#Scatter_settings}{Scatter settings}
 #' @param bullet list of settings for the bullets created with
 #'   \code{\link{amCircle}}, \code{\link{amTriangle}} or \code{\link{amRectangle}}
 #' @param cluster list of settings for the clusters created with
@@ -293,6 +293,18 @@ addLineWithPlane <- function(
 #'
 #' @return An \code{amMapChart} widget.
 #' @export
+#'
+#' @examples
+#' library(amMapCharts5)
+#' continents <-
+#'   system.file("geojson", "continentsLow.json", package = "amMapCharts5")
+#' amMapChart() |>
+#'   addPolygons(continents, color = "violet", strokeColor = "black") |>
+#'   addClusteredPoints(
+#'     cities,
+#'     bullet = amTriangle("red", strokeColor = "black"),
+#'     cluster = amCluster("orange")
+#'   )
 addClusteredPoints <- function(
     map, coordinates, minDistance = 20,
     scatterDistance = 10, scatterRadius = 10, stopClusterZoom = 0.95,

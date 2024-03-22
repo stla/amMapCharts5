@@ -4,7 +4,7 @@
 \alias{amCluster}
 \title{Cluster settings}
 \usage{
-amCluster(color = NULL, radius = 6, labelColor = "black", fontSize = 8)
+amCluster(color = NULL, radius = 6, labelColor = "black", fontSize = 9)
 }
 \arguments{
 \item{color}{color}

@@ -120,7 +120,7 @@ amCluster <- function(
     color = NULL,
     radius = 6,
     labelColor = "black",
-    fontSize = 8
+    fontSize = 9
 ){
   cluster <- list(
     color = validateColor(color),
