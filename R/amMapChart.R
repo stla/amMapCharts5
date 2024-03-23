@@ -24,8 +24,8 @@ geoProjections <- function() {
 #'  \code{"equirectangular"}, \code{"Mercator"}, \code{"naturalEarth1"} or
 #'  \code{"orthographic"}
 #' @param panX,panY see \href{https://www.amcharts.com/docs/v5/charts/map-chart/map-pan-zoom/#Panning}{Panning}
-#' @param grid list of settings for the grid; set to \code{NULL} for no grid
-#' @param width,height dimensions
+#' @param grid list of settings for the grid (see the default value); set to
+#'   \code{NULL} for no grid
 #' @param elementId a HTML id (usually useless)
 #'
 #' @returns An \code{amMapChart} widget.
@@ -42,7 +42,7 @@ geoProjections <- function() {
 amMapChart <- function(
   projection = "Mercator", panX = "translateX", panY = "translateY",
   grid = list(step = 10, color = "black", opacity = 0.2),
-  width = NULL, height = NULL, elementId = NULL
+  elementId = NULL
 ) {
   panX <- match.arg(panX, c("none", "translateX", "rotateX"))
   panY <- match.arg(panY, c("none", "translateY", "rotateY"))
@@ -55,18 +55,18 @@ amMapChart <- function(
   grid[["color"]] <- validateColor(grid[["color"]])
   x = list(
     projection = gProjections[projection][[1L]],
-    panX = panX,
-    panY = panY,
-    grid = grid
+    panX       = panX,
+    panY       = panY,
+    grid       = grid
   )
 
   # create widget
   createWidget(
-    name = "amMapChart",
+    name      = "amMapChart",
     x,
-    width = width,
-    height = height,
-    package = "amMapCharts5",
+    width     = NULL,
+    height    = NULL,
+    package   = "amMapCharts5",
     elementId = elementId
   )
 }
@@ -211,7 +211,6 @@ updateAmMapChart <- function(
   }
   if(!is.null(panX)) {
     panX <- match.arg(panX, c("none", "translateX", "rotateX"))
-    panY <- match.arg(panY, c("none", "translateY", "rotateY"))
   }
   if(!is.null(panY)) {
     panY <- match.arg(panY, c("none", "translateY", "rotateY"))

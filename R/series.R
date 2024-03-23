@@ -54,10 +54,7 @@ addPolygons <- function(
       )
     })
   }
-  series <- map[["x"]][["series"]]
-  if(is.null(series)) {
-    series <- list()
-  }
+  series <- map[["x"]][["series"]] %||% list()
   series[[length(series) + 1L]] <- list(
     "type"    = "MapPolygonSeries",
     "data"    = data,
@@ -125,10 +122,7 @@ addPoints <- function(
       )
     })
   }
-  series <- map[["x"]][["series"]]
-  if(is.null(series)) {
-    series <- list()
-  }
+  series <- map[["x"]][["series"]] %||% list()
   series[[length(series) + 1L]] <- list(
     "type"    = "MapPointSeries",
     "data"    = data,
@@ -198,10 +192,7 @@ addLines <- function(
       )
     })
   }
-  series <- map[["x"]][["series"]]
-  if(is.null(series)) {
-    series <- list()
-  }
+  series <- map[["x"]][["series"]] %||% list()
   series[[length(series) + 1L]] <- list(
     "type"    = "MapLineSeries",
     "data"    = data,
@@ -257,10 +248,7 @@ addLineWithPlane <- function(
       "coordinates" = unname(coordinates)
     )
   )
-  series <- map[["x"]][["series"]]
-  if(is.null(series)) {
-    series <- list()
-  }
+  series <- map[["x"]][["series"]] %||% list()
   series[[length(series) + 1L]] <- list(
     "type"          = "lineWithPlane",
     "planePosition" = planePosition,
@@ -339,10 +327,7 @@ addClusteredPoints <- function(
       )
     })
   }
-  series <- map[["x"]][["series"]]
-  if(is.null(series)) {
-    series <- list()
-  }
+  series <- map[["x"]][["series"]] %||% list()
   series[[length(series) + 1L]] <- list(
     "type"    = "ClusteredPointSeries",
     "data"    = data,

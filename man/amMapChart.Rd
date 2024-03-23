@@ -9,8 +9,6 @@ amMapChart(
   panX = "translateX",
   panY = "translateY",
   grid = list(step = 10, color = "black", opacity = 0.2),
-  width = NULL,
-  height = NULL,
   elementId = NULL
 )
 }
@@ -21,9 +19,8 @@ amMapChart(
 
 \item{panX, panY}{see \href{https://www.amcharts.com/docs/v5/charts/map-chart/map-pan-zoom/#Panning}{Panning}}
 
-\item{grid}{list of settings for the grid; set to \code{NULL} for no grid}
-
-\item{width, height}{dimensions}
+\item{grid}{list of settings for the grid (see the default value); set to
+\code{NULL} for no grid}
 
 \item{elementId}{a HTML id (usually useless)}
 }
