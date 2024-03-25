@@ -1,6 +1,6 @@
 dependencies:
- - name: amcharts5
-   version: 5.8.6
+ - name: amcharts5-map
+   version: 5.8.7
    src: htmlwidgets/lib/amCharts5
    script:
     - index.js
